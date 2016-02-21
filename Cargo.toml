@@ -1,0 +1,15 @@
+[package]
+name = "hextest"
+version = "0.1.0"
+
+[dependencies]
+piston = "*"
+piston_window = "*"
+piston2d-opengl_graphics = "*"
+pistoncore-sdl2_window = "*"
+
+# Locked due to https://github.com/PistonDevelopers/opengl_graphics/issues/222
+piston2d-graphics = "0.13.0"
+
+hex2d = "*"
+rand = "*"
