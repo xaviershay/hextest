@@ -95,7 +95,18 @@ impl App {
         let (x, y) = ((args.width / 2) as f64,
                       (args.height / 2) as f64);
 
+        let t = 1.0;
+        let arc = 3.14; // radians
+        let z = 0.2;
+
+        let mut dt = self.rotation;
+        if dt >= t {
+          dt = t;
+        }
+
         let ref coords = self.coordinates;
+        let r = -arc + (dt / t) * arc;
+        let z = z + (dt / t) * (1.0 - z);
 
         self.gl.draw(args.viewport(), |c, gl| {
             // Clear the screen.
@@ -106,6 +117,8 @@ impl App {
 
                 let transform = c.transform
                   .trans(x, y)
+                  .rot_rad(r)
+                  .scale(z, z)
                   .scale(30.0, 30.0)
                   .trans(coords.0 as f64, coords.1 as f64)
                   .scale(0.9, 0.9)
@@ -126,6 +139,7 @@ impl App {
 
     fn update(&mut self, args: &UpdateArgs) {
         // Rotate 2 radians per second.
+        self.rotation += args.dt;
         //self.rotation += 2.0 * args.dt;
     }
 }
